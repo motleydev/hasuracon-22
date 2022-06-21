@@ -32,15 +32,15 @@ export default function NeedsAuth({}: Props) {
       <div className="mb-6">
         <article className="prose">
           <h1>
-            Welcome, would you like to join us? You'll need to{" "}
+            <span>Welcome, would you like to join us? You&apos;ll need to</span>
             <ActionButton action={setActionNeeded} value={CONSTS.SINGUP}>
-              signup
-            </ActionButton>{" "}
-            or{" "}
+              <span>signup</span>
+            </ActionButton>
+            <span>or</span>
             <ActionButton action={setActionNeeded} value={CONSTS.LOGIN}>
-              login
-            </ActionButton>{" "}
-            to continue.
+              <span>login</span>
+            </ActionButton>
+            <span>to continue.</span>
           </h1>
         </article>
       </div>
