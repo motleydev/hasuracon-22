@@ -11,7 +11,7 @@ type Props = {};
 export default function FormInput({}: Props) {
   const [input, setInput] = React.useState("");
 
-  const handleInput = (e) => {
+  const handleInput = (e: any) => {
     e.preventDefault();
     client
       .mutation<InsertFruitMutation, InsertFruitMutationVariables>(
