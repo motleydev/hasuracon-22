@@ -17,8 +17,6 @@ export default async function handler(
   const { username, password }: { username?: string; password: string } =
     req.body;
 
-  const hashedPass = await bcrypt.hash(password, 10);
-
   return client
     .query<CheckUserQuery, CheckUserQueryVariables>(CheckUser, {
       username,
@@ -26,7 +24,12 @@ export default async function handler(
     .toPromise()
     .then(async (result) => {
       if (result?.error) {
-        return res.status(400).json({ message: "Error with query" });
+        return res
+          .status(400)
+          .json({
+            message: "Error with query",
+            payload: result.error.graphQLErrors,
+          });
       } else {
         const user = result.data?.user[0];
         if (!user)
