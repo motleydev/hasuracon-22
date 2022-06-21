@@ -1,0 +1,5 @@
+mutation InsertFruit($fruit: String) {
+  insert_fruit_one(object: { name: $fruit }) {
+    name
+  }
+}

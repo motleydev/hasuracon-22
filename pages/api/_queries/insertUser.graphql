@@ -1,0 +1,17 @@
+mutation InsertUserOne(
+  $username: String
+  $password: String
+  $refresh_token: String
+) {
+  insert_user_one(
+    object: {
+      username: $username
+      password: $password
+      refresh_token: $refresh_token
+    }
+  ) {
+    id
+    refresh_token
+    username
+  }
+}
