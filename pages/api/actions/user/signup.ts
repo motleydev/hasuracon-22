@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
 import { v4 as uuid } from "uuid";
 import client from "../../_utils/client";
+import { setCookie } from "../../../../utils/cookie";
+
 import { generateJWT } from "../../../../utils/jwt";
 
 import checkMessage from "../../../../utils/checkMessage";
@@ -49,6 +51,14 @@ export default async function handler(
           otherClaims: {
             "X-Hasura-User-Id": user.id.toString(),
           },
+        });
+
+        setCookie(res, "hasura-user-token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV !== "development",
+          maxAge: 60 * 60 * 60 * 60,
+          sameSite: "strict",
+          path: "/",
         });
 
         return res.json({
