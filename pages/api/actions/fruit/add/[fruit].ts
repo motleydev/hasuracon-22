@@ -21,7 +21,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         console.log(result.error);
         res.status(200).json({ message: `query not ok` });
       } else {
-        res.status(200).json({ message: `ok` });
+        res.status(200).json({ name: result.data?.insert_fruit_one?.name });
       }
     })
     .catch((e: any) => {
