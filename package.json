@@ -5,9 +5,11 @@
   "license": "MIT",
   "dependencies": {
     "@urql/core": "^2.5.0",
+    "@vercel/fetch": "^6.2.0",
     "@vercel/node": "^2.2.0",
     "fuse.js": "^6.6.2",
     "graphql": "^16.5.0",
+    "isomorphic-unfetch": "^3.1.0",
     "urql": "^2.2.2"
   }
 }

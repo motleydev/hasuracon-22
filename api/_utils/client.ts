@@ -1,4 +1,5 @@
 import { createClient, defaultExchanges } from "@urql/core";
+import "isomorphic-unfetch";
 
 const client = createClient({
   url: process.env.HASURA_PROJECT_ENDPOINT as string,
@@ -9,6 +10,7 @@ const client = createClient({
       },
     };
   },
+  fetch: fetch,
   exchanges: defaultExchanges,
 });
 
