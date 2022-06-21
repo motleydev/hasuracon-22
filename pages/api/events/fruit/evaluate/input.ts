@@ -15,10 +15,7 @@ const options = {
 
 const fuse = new Fuse(fruits, options);
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<string>
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { fruit, id }: { fruit?: string; id: string } = req.body;
   if (fruit) {
     const result = fuse.search(fruit);
@@ -33,16 +30,16 @@ export default function handler(
       .then((result) => {
         if (result?.error) {
           console.log(result.error.graphQLErrors);
-          res.status(200).send(`query not ok`);
+          res.status(200).json({ message: `query not ok` });
         } else {
-          res.status(200).send(`ok`);
+          res.status(200).json({ message: `ok` });
         }
       })
       .catch((e: any) => {
         console.log(e);
-        res.status(200).send(`server not ok`);
+        res.status(200).json({ message: `server not ok` });
       });
   } else {
-    res.status(400).send("no input provided");
+    res.status(400).json({ message: "no input provided" });
   }
 }

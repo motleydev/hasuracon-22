@@ -7,10 +7,7 @@ import {
   InsertFruit,
 } from "../../../../../generated/graphql";
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<string>
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { fruit }: { fruit?: string } = req.query;
   const value = normalize(fruit);
 
@@ -22,13 +19,13 @@ export default function handler(
     .then((result) => {
       if (result?.error) {
         console.log(result.error);
-        res.status(200).send(`query not ok`);
+        res.status(200).json({ message: `query not ok` });
       } else {
-        res.status(200).send(`ok`);
+        res.status(200).json({ message: `ok` });
       }
     })
     .catch((e: any) => {
       console.log(e);
-      res.status(200).send(`server not ok`);
+      res.status(200).json({ message: `server not ok` });
     });
 }
