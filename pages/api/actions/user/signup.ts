@@ -61,7 +61,7 @@ export default async function handler(
           path: "/",
         });
 
-        return res.json({
+        return res.status(200).json({
           token,
           username: user.username,
           refreshToken: user.refresh_token,
