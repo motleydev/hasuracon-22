@@ -53,6 +53,7 @@ export default async function handler(
 
         return res.status(200).json({
           token,
+          id: user.id,
           username: user.username,
           refreshToken: user.refresh_token,
         });

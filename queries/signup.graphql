@@ -1,0 +1,8 @@
+mutation Signup($username: String!, $password: String!) {
+  signup(username: $username, password: $password) {
+    id
+    token
+    refreshToken
+    username
+  }
+}

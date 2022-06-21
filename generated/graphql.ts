@@ -16,6 +16,11 @@ export type Scalars = {
   uuid: any;
 };
 
+export type FruitOutput = {
+  __typename?: 'FruitOutput';
+  name: Scalars['String'];
+};
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['String']>;
@@ -47,6 +52,14 @@ export type String_Comparison_Exp = {
   _regex?: InputMaybe<Scalars['String']>;
   /** does the column match the given SQL regular expression */
   _similar?: InputMaybe<Scalars['String']>;
+};
+
+export type UserOutput = {
+  __typename?: 'UserOutput';
+  id?: Maybe<Scalars['uuid']>;
+  refreshToken?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 /** columns and relationships of "fruit" */
@@ -237,6 +250,7 @@ export type Fruit_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  createFruit?: Maybe<FruitOutput>;
   /** delete data from the table: "fruit" */
   delete_fruit?: Maybe<Fruit_Mutation_Response>;
   /** delete single row from the table: "fruit" */
@@ -253,6 +267,8 @@ export type Mutation_Root = {
   insert_user?: Maybe<User_Mutation_Response>;
   /** insert a single row into the table: "user" */
   insert_user_one?: Maybe<User>;
+  login?: Maybe<UserOutput>;
+  signup?: Maybe<UserOutput>;
   /** update data of the table: "fruit" */
   update_fruit?: Maybe<Fruit_Mutation_Response>;
   /** update single row of the table: "fruit" */
@@ -261,6 +277,12 @@ export type Mutation_Root = {
   update_user?: Maybe<User_Mutation_Response>;
   /** update single row of the table: "user" */
   update_user_by_pk?: Maybe<User>;
+};
+
+
+/** mutation root */
+export type Mutation_RootCreateFruitArgs = {
+  fruit?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -313,6 +335,20 @@ export type Mutation_RootInsert_UserArgs = {
 export type Mutation_RootInsert_User_OneArgs = {
   object: User_Insert_Input;
   on_conflict?: InputMaybe<User_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootLoginArgs = {
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootSignupArgs = {
+  password: Scalars['String'];
+  username: Scalars['String'];
 };
 
 
@@ -724,6 +760,22 @@ export type RefreshTokenQueryVariables = Exact<{
 
 export type RefreshTokenQuery = { __typename?: 'query_root', user: Array<{ __typename?: 'user', id: any, username: string, refresh_token: string }> };
 
+export type UserLoginMutationVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type UserLoginMutation = { __typename?: 'mutation_root', login?: { __typename?: 'UserOutput', id?: any | null, token?: string | null, refreshToken?: string | null, username?: string | null } | null };
+
+export type SignupMutationVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type SignupMutation = { __typename?: 'mutation_root', signup?: { __typename?: 'UserOutput', id?: any | null, token?: string | null, refreshToken?: string | null, username?: string | null } | null };
+
 
 export const InsertFruit = gql`
     mutation InsertFruit($fruit: String) {
@@ -772,6 +824,26 @@ export const RefreshToken = gql`
   }
 }
     `;
+export const UserLogin = gql`
+    mutation UserLogin($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    id
+    token
+    refreshToken
+    username
+  }
+}
+    `;
+export const Signup = gql`
+    mutation Signup($username: String!, $password: String!) {
+  signup(username: $username, password: $password) {
+    id
+    token
+    refreshToken
+    username
+  }
+}
+    `;
 import { IntrospectionQuery } from 'graphql';
 export default {
   "__schema": {
@@ -785,6 +857,63 @@ export default {
       "name": "subscription_root"
     },
     "types": [
+      {
+        "kind": "OBJECT",
+        "name": "FruitOutput",
+        "fields": [
+          {
+            "name": "name",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UserOutput",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "refreshToken",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "token",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "username",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
       {
         "kind": "OBJECT",
         "name": "fruit",
@@ -1208,6 +1337,23 @@ export default {
         "name": "mutation_root",
         "fields": [
           {
+            "name": "createFruit",
+            "type": {
+              "kind": "OBJECT",
+              "name": "FruitOutput",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "fruit",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
             "name": "delete_fruit",
             "type": {
               "kind": "OBJECT",
@@ -1403,6 +1549,66 @@ export default {
                 "type": {
                   "kind": "SCALAR",
                   "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "login",
+            "type": {
+              "kind": "OBJECT",
+              "name": "UserOutput",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "password",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              },
+              {
+                "name": "username",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "signup",
+            "type": {
+              "kind": "OBJECT",
+              "name": "UserOutput",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "password",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              },
+              {
+                "name": "username",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
                 }
               }
             ]
