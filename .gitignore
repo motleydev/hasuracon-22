@@ -2,3 +2,6 @@
 node_modules/
 .tool-versions
 .DS_Store
+.next
+yarn-error.log
+.env.local
