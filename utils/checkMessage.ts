@@ -9,3 +9,5 @@ const checkMessage = (message: string) => (arr: any[]) => {
   }
   return status;
 };
+
+export default checkMessage;
