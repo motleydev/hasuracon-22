@@ -25,7 +25,6 @@ const options = {
 const fuse = new Fuse(fruits, options);
 
 export default (request: VercelRequest, response: VercelResponse) => {
-  const data = request.body;
   const { fruit, id }: { fruit?: string; id: string } = request.body;
   if (fruit) {
     const result = fuse.search(fruit);
@@ -37,14 +36,14 @@ export default (request: VercelRequest, response: VercelResponse) => {
       .then((result) => {
         if (result?.error) {
           console.log(result.error);
-          response.status(200).send(`query not ok`);
+          response.status(200).json({ message: `query not ok` });
         } else {
-          response.status(200).send(`ok`);
+          response.status(200).json({ message: `ok` });
         }
       })
       .catch((e) => {
         console.log(e);
-        response.status(200).send(`server not ok`);
+        response.status(200).json({ message: `server not ok` });
       });
   } else {
     response.status(400).json({ message: "no input provided" });
