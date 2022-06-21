@@ -6,7 +6,7 @@ It's important to understand three key concepts as to why I think these three wo
 2. Best-of-breed software that allows for abstracting the different layers of the stack is a good thing (stack components)
 3. Less code is a good thing. Rahms (gestalt theory)
 
-alt - 
+alt -
 
 The promise:
 Hasura acts as the perfect server-state backend for apps built on Vercel.
@@ -15,7 +15,6 @@ and
 
 How Vercel unlocks Hasura's power features with functions on the edge.
 
-
 ---
 
 Let's break this down into parts:
@@ -23,10 +22,10 @@ Let's break this down into parts:
 1. What does "Hasura as server-state" mean
 2. What is Vercel and what are these edge functions?
 
-
 ---
 
-#  Hasura fills two implicit functions in our builders tool kit
+# Hasura fills two implicit functions in our builders tool kit
+
 1. An API for data CRUD
 2. An abstraction for our data as a data store
 
@@ -54,10 +53,11 @@ Not all serverless frameworks are created equal. Serverless and particularly ser
 An eaven nicer approach would be if this was tailor made to work with a couple of frameworks for calling these functions and hehaviours.
 
 ---
-More slides
----
+
+## More slides
 
 vercel allows us to bridge the gap between web framework and serverless platform
 
 This new integration allows us to bridge the divide between these two platforms.
 
+Update
