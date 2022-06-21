@@ -10,7 +10,6 @@ const client = createClient({
       },
     };
   },
-  fetch: fetch,
   exchanges: defaultExchanges,
 });
 
