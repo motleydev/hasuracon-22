@@ -1,0 +1,5 @@
+mutation UpdateUserCity($city: String, $id: uuid!) {
+  update_user_by_pk(pk_columns: { id: $id }, _set: { city: $city }) {
+    id
+  }
+}

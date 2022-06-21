@@ -68,6 +68,7 @@ export type Fruit = {
   id: Scalars['uuid'];
   name: Scalars['String'];
   score?: Maybe<Scalars['numeric']>;
+  user_id?: Maybe<Scalars['uuid']>;
 };
 
 /** aggregated selection of "fruit" */
@@ -114,6 +115,7 @@ export type Fruit_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   score?: InputMaybe<Numeric_Comparison_Exp>;
+  user_id?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "fruit" */
@@ -132,6 +134,7 @@ export type Fruit_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
   score?: InputMaybe<Scalars['numeric']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
@@ -140,6 +143,7 @@ export type Fruit_Max_Fields = {
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   score?: Maybe<Scalars['numeric']>;
+  user_id?: Maybe<Scalars['uuid']>;
 };
 
 /** aggregate min on columns */
@@ -148,6 +152,7 @@ export type Fruit_Min_Fields = {
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   score?: Maybe<Scalars['numeric']>;
+  user_id?: Maybe<Scalars['uuid']>;
 };
 
 /** response of any mutation on the table "fruit" */
@@ -171,6 +176,7 @@ export type Fruit_Order_By = {
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   score?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: fruit */
@@ -185,7 +191,9 @@ export enum Fruit_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Score = 'score'
+  Score = 'score',
+  /** column name */
+  UserId = 'user_id'
 }
 
 /** input type for updating data in table "fruit" */
@@ -193,6 +201,7 @@ export type Fruit_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
   score?: InputMaybe<Scalars['numeric']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate stddev on columns */
@@ -226,7 +235,9 @@ export enum Fruit_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Score = 'score'
+  Score = 'score',
+  /** column name */
+  UserId = 'user_id'
 }
 
 /** aggregate var_pop on columns */
@@ -550,6 +561,7 @@ export type Timestamptz_Comparison_Exp = {
 /** columns and relationships of "user" */
 export type User = {
   __typename?: 'user';
+  city?: Maybe<Scalars['String']>;
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
   password: Scalars['String'];
@@ -585,6 +597,7 @@ export type User_Bool_Exp = {
   _and?: InputMaybe<Array<User_Bool_Exp>>;
   _not?: InputMaybe<User_Bool_Exp>;
   _or?: InputMaybe<Array<User_Bool_Exp>>;
+  city?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   password?: InputMaybe<String_Comparison_Exp>;
@@ -605,6 +618,7 @@ export enum User_Constraint {
 
 /** input type for inserting data into table "user" */
 export type User_Insert_Input = {
+  city?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   password?: InputMaybe<Scalars['String']>;
@@ -616,6 +630,7 @@ export type User_Insert_Input = {
 /** aggregate max on columns */
 export type User_Max_Fields = {
   __typename?: 'user_max_fields';
+  city?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   password?: Maybe<Scalars['String']>;
@@ -627,6 +642,7 @@ export type User_Max_Fields = {
 /** aggregate min on columns */
 export type User_Min_Fields = {
   __typename?: 'user_min_fields';
+  city?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   password?: Maybe<Scalars['String']>;
@@ -653,6 +669,7 @@ export type User_On_Conflict = {
 
 /** Ordering options when selecting data from "user". */
 export type User_Order_By = {
+  city?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   password?: InputMaybe<Order_By>;
@@ -669,6 +686,8 @@ export type User_Pk_Columns_Input = {
 /** select columns of table "user" */
 export enum User_Select_Column {
   /** column name */
+  City = 'city',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
@@ -684,6 +703,7 @@ export enum User_Select_Column {
 
 /** input type for updating data in table "user" */
 export type User_Set_Input = {
+  city?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   password?: InputMaybe<Scalars['String']>;
@@ -694,6 +714,8 @@ export type User_Set_Input = {
 
 /** update columns of table "user" */
 export enum User_Update_Column {
+  /** column name */
+  City = 'city',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -760,6 +782,11 @@ export type RefreshTokenQueryVariables = Exact<{
 
 export type RefreshTokenQuery = { __typename?: 'query_root', user: Array<{ __typename?: 'user', id: any, username: string, refresh_token: string }> };
 
+export type GetFruitSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFruitSubscription = { __typename?: 'subscription_root', fruit: Array<{ __typename?: 'fruit', name: string, score?: any | null }> };
+
 export type UserLoginMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -775,6 +802,14 @@ export type SignupMutationVariables = Exact<{
 
 
 export type SignupMutation = { __typename?: 'mutation_root', signup?: { __typename?: 'UserOutput', id?: any | null, token?: string | null, refreshToken?: string | null, username?: string | null } | null };
+
+export type UpdateUserCityMutationVariables = Exact<{
+  city?: InputMaybe<Scalars['String']>;
+  id: Scalars['uuid'];
+}>;
+
+
+export type UpdateUserCityMutation = { __typename?: 'mutation_root', update_user_by_pk?: { __typename?: 'user', id: any } | null };
 
 
 export const InsertFruit = gql`
@@ -824,6 +859,14 @@ export const RefreshToken = gql`
   }
 }
     `;
+export const GetFruit = gql`
+    subscription GetFruit {
+  fruit {
+    name
+    score
+  }
+}
+    `;
 export const UserLogin = gql`
     mutation UserLogin($username: String!, $password: String!) {
   login(username: $username, password: $password) {
@@ -841,6 +884,13 @@ export const Signup = gql`
     token
     refreshToken
     username
+  }
+}
+    `;
+export const UpdateUserCity = gql`
+    mutation UpdateUserCity($city: String, $id: uuid!) {
+  update_user_by_pk(pk_columns: {id: $id}, _set: {city: $city}) {
+    id
   }
 }
     `;
@@ -942,6 +992,14 @@ export default {
           },
           {
             "name": "score",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "user_id",
             "type": {
               "kind": "SCALAR",
               "name": "Any"
@@ -1156,6 +1214,14 @@ export default {
               "name": "Any"
             },
             "args": []
+          },
+          {
+            "name": "user_id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
           }
         ],
         "interfaces": []
@@ -1182,6 +1248,14 @@ export default {
           },
           {
             "name": "score",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "user_id",
             "type": {
               "kind": "SCALAR",
               "name": "Any"
@@ -2341,6 +2415,14 @@ export default {
         "name": "user",
         "fields": [
           {
+            "name": "city",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
             "name": "created_at",
             "type": {
               "kind": "NON_NULL",
@@ -2505,6 +2587,14 @@ export default {
         "name": "user_max_fields",
         "fields": [
           {
+            "name": "city",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
             "name": "created_at",
             "type": {
               "kind": "SCALAR",
@@ -2559,6 +2649,14 @@ export default {
         "kind": "OBJECT",
         "name": "user_min_fields",
         "fields": [
+          {
+            "name": "city",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
           {
             "name": "created_at",
             "type": {

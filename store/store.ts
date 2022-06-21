@@ -50,7 +50,8 @@ const useStore = create<HasuraDemo>()(
               if (d.data?.signup) {
                 const { token, id, refreshToken } = d.data?.signup;
                 set({ user: { authed: AUTH.AUTHED, token, id, refreshToken } });
-                // Cookies.set("user_authed", "true");
+                Cookies.set("hs-access-token", token as string);
+                Cookies.set("hs-user-id", id as string);
               } else {
                 console.log("Error in signing up user");
               }
@@ -74,8 +75,10 @@ const useStore = create<HasuraDemo>()(
             .then((d) => {
               if (d.data?.login) {
                 const { token, id, refreshToken } = d.data?.login;
+                Cookies.set("hs-access-token", token as string);
+                Cookies.set("hs-user-id", id as string);
+
                 set({ user: { authed: AUTH.AUTHED, token, id, refreshToken } });
-                // Cookies.set("user_authed", "true");
               } else {
                 console.log(d.error);
                 console.log("Error in logging in user");

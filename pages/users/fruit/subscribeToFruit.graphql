@@ -1,0 +1,6 @@
+subscription GetFruit {
+  fruit {
+    name
+    score
+  }
+}
