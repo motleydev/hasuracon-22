@@ -1,0 +1,7 @@
+query RefreshToken($refresh_token: String) {
+  user(where: { refresh_token: { _eq: $refresh_token } }) {
+    id
+    username
+    refresh_token
+  }
+}

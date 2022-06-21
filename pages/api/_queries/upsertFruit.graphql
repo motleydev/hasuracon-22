@@ -1,0 +1,8 @@
+mutation UpsertFruit($id: uuid, $score: numeric, $fruit: String) {
+  insert_fruit_one(
+    object: { id: $id, score: $score, name: $fruit }
+    on_conflict: { constraint: fruit_pkey, update_columns: score }
+  ) {
+    score
+  }
+}
