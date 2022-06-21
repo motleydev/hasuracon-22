@@ -22,7 +22,7 @@ export default (request: VercelRequest, response: VercelResponse) => {
         console.log(result.error);
         response.status(200).json({ message: `query not ok` });
       } else {
-        response.status(200).json({ name: result.data.name });
+        response.status(200).json({ name: result.data.insert_fruit_one.name });
       }
     })
     .catch((e) => {
