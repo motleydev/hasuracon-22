@@ -24,12 +24,11 @@ export default async function handler(
     .toPromise()
     .then(async (result) => {
       if (result?.error) {
-        return res
-          .status(400)
-          .json({
-            message: "Error with query",
-            payload: result.error.graphQLErrors,
-          });
+        console.log(result.error.graphQLErrors);
+        return res.status(400).json({
+          message: "Error with query",
+          payload: result.error.graphQLErrors,
+        });
       } else {
         const user = result.data?.user[0];
         if (!user)
