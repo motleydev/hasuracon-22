@@ -1,8 +1,20 @@
+import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
+
 import NeedsAuth from "../components/NeedsAuth";
+import { useStore, AUTH } from "../store/store";
 
 const Home: NextPage = () => {
+  const authed = useStore((state) => state.user.authed);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (authed === AUTH.AUTHED) {
+      router.push("/dashboard");
+    }
+  }, [authed]);
   return (
     <>
       <Head>
