@@ -12,7 +12,7 @@ const Home: NextPage = () => {
 
   React.useEffect(() => {
     if (authed === AUTH.AUTHED) {
-      router.push("/dashboard");
+      router.push("/users/fruit/create");
     }
   }, [authed]);
   return (
